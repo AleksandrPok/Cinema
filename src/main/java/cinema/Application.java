@@ -12,6 +12,8 @@ public class Application {
         Movie movie = new Movie();
         movie.setTitle("The Adventures of Buckaroo Banzai Across the 8th Dimension");
         movieService.add(movie);
+        movie.setTitle("The Last Starfighter");
+        movieService.add(movie);
         for (Movie m : movieService.getAll()) {
             System.out.println(m);
         }
