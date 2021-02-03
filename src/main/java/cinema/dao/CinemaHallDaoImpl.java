@@ -2,30 +2,29 @@ package cinema.dao;
 
 import cinema.exception.DataProcessException;
 import cinema.lib.DaoImpl;
-import cinema.model.Movie;
+import cinema.model.CinemaHall;
 import cinema.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 @DaoImpl
-public class MovieDaoImpl implements MovieDao {
+public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
-    public Movie add(Movie movie) {
+    public CinemaHall add(CinemaHall cinemaHall) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(movie);
+            session.persist(cinemaHall);
             transaction.commit();
-            return movie;
+            return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessException("Can't save movie to database " + movie, e);
+            throw new DataProcessException("Can't add cinema hall: " + cinemaHall, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -34,12 +33,11 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<Movie> getAll() {
+    public List<CinemaHall> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Movie> getAll = session.createQuery("FROM Movie", Movie.class);
-            return getAll.getResultList();
+            return session.createQuery("FROM CinemaHall", CinemaHall.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessException("Can't get all movies from database: ", e);
+            throw new DataProcessException("Can't get cinema halls", e);
         }
     }
 }
