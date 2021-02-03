@@ -4,9 +4,9 @@ import cinema.exception.DataProcessException;
 import cinema.lib.DaoImpl;
 import cinema.model.User;
 import cinema.util.HibernateUtil;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.Optional;
 
 @DaoImpl
 public class UserDaoImpl implements UserDao {
@@ -34,11 +34,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-           return session.createQuery("FROM User WHERE email = :email", User.class)
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM User WHERE email = :email", User.class)
                    .setParameter("email", email).uniqueResultOptional();
-       } catch (Exception e) {
-           throw new DataProcessException("Can't find user by email: " + email, e);
-       }
+        } catch (Exception e) {
+            throw new DataProcessException("Can't find user by email: " + email, e);
+        }
     }
 }

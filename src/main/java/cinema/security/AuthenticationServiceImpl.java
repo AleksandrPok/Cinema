@@ -13,11 +13,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
 
-
     @Override
     public User login(String email, String password) throws AuthenticationException {
         Optional<User> user = userService.findByEmail(email);
-        if (user.isPresent() && user.get().getPassword().equals(HashUtil.hashPassword(password, user.get().getSalt()))) {
+        if (user.isPresent() && user.get().getPassword()
+                .equals(HashUtil.hashPassword(password, user.get().getSalt()))) {
             return user.get();
         }
         throw new AuthenticationException("Incorrect email or password");
