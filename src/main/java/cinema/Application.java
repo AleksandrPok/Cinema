@@ -54,7 +54,6 @@ public class Application {
         shoppingCartService.addSession(movieSession, firstUser);
         shoppingCartService.addSession(movieSession, secondUser);
         System.out.println(shoppingCartService.getByUser(firstUser));
-        shoppingCartService.clear(shoppingCartService.getByUser(secondUser));
         System.out.println(shoppingCartService.getByUser(secondUser));
     }
 }
