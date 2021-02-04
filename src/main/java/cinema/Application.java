@@ -1,9 +1,11 @@
 package cinema;
 
+import cinema.exception.AuthenticationException;
 import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
+import cinema.security.AuthenticationService;
 import cinema.service.CinemaHallService;
 import cinema.service.MovieService;
 import cinema.service.MovieSessionService;
@@ -36,5 +38,13 @@ public class Application {
         System.out.println(movieSessionService.findAvailableSessions(movie.getId(),
                 showTime.toLocalDate()));
 
+        AuthenticationService authenticationService = (AuthenticationService)
+                injector.getInstance(AuthenticationService.class);
+        authenticationService.register("example@gmail.com", "password");
+        try {
+            System.out.println(authenticationService.login("example@gmail.com", "password"));
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("Incorrect email or password", e);
+        }
     }
 }
