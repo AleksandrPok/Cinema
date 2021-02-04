@@ -5,10 +5,12 @@ import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
+import cinema.model.User;
 import cinema.security.AuthenticationService;
 import cinema.service.CinemaHallService;
 import cinema.service.MovieService;
 import cinema.service.MovieSessionService;
+import cinema.service.ShoppingCartService;
 import java.time.LocalDateTime;
 
 public class Application {
@@ -40,11 +42,18 @@ public class Application {
 
         AuthenticationService authenticationService = (AuthenticationService)
                 injector.getInstance(AuthenticationService.class);
-        authenticationService.register("example@gmail.com", "password");
+        User firstUser = authenticationService.register("first@gmail.com", "firstPassword");
+        User secondUser = authenticationService.register("second@gmail.com", "secondPassword");
         try {
-            System.out.println(authenticationService.login("example@gmail.com", "password"));
+            System.out.println(authenticationService.login("first@gmail.com", "firstPassword"));
         } catch (AuthenticationException e) {
             throw new RuntimeException("Incorrect email or password", e);
         }
+        ShoppingCartService shoppingCartService = (ShoppingCartService)
+                injector.getInstance(ShoppingCartService.class);
+        shoppingCartService.addSession(movieSession, firstUser);
+        shoppingCartService.addSession(movieSession, secondUser);
+        System.out.println(shoppingCartService.getByUser(firstUser));
+        System.out.println(shoppingCartService.getByUser(secondUser));
     }
 }
