@@ -40,7 +40,7 @@ public class OrderDaoImpl implements OrderDao {
                     + "LEFT JOIN FETCH o.tickets WHERE o.user = :user", Order.class)
                     .setParameter("user", user).getResultList();
         } catch (Exception e) {
-            throw new DataProcessException("Can't get user history: " + user, e);
+            throw new DataProcessException("Can't get user's orders history: " + user, e);
         }
     }
 }
