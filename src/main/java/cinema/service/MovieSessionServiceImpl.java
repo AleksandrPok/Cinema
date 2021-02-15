@@ -1,16 +1,18 @@
 package cinema.service;
 
 import cinema.dao.MovieSessionDao;
-import cinema.lib.Inject;
-import cinema.lib.ServiceImpl;
 import cinema.model.MovieSession;
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-@ServiceImpl
+@Service
 public class MovieSessionServiceImpl implements MovieSessionService {
-    @Inject
-    private MovieSessionDao movieSessionDao;
+    private final MovieSessionDao movieSessionDao;
+
+    public MovieSessionServiceImpl(MovieSessionDao movieSessionDao) {
+        this.movieSessionDao = movieSessionDao;
+    }
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
