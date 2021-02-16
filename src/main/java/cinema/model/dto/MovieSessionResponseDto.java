@@ -3,7 +3,6 @@ package cinema.model.dto;
 public class MovieSessionResponseDto {
     private Long id;
     private Long movieId;
-    private String movieTitle;
     private Long cinemaHallId;
     private String showTime;
 
@@ -21,14 +20,6 @@ public class MovieSessionResponseDto {
 
     public void setMovieId(Long movieId) {
         this.movieId = movieId;
-    }
-
-    public String getMovieTitle() {
-        return movieTitle;
-    }
-
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
     }
 
     public Long getCinemaHallId() {
