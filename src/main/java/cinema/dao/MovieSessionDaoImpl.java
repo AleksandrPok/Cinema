@@ -58,7 +58,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
 
     @Override
     public Optional<MovieSession> get(Long id) {
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(MovieSession.class, id));
         } catch (Exception e) {
             throw new DataProcessException("Can't get movie session with id: " + id, e);
@@ -97,13 +97,13 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             MovieSession deletableSession = session.load(MovieSession.class, id);
             session.delete(deletableSession);
             transaction.commit();
-                    } catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessException("Can't delete movie session: " + id, e);
         } finally {
-            if(session != null) {
+            if (session != null) {
                 session.close();
             }
         }
