@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OrderResponseDto {
     private Long id;
-    private List<Long> tickets;
+    private List<Long> ticketIds;
     private String orderDate;
     private String email;
 
@@ -17,11 +17,11 @@ public class OrderResponseDto {
     }
 
     public List<Long> getTickets() {
-        return tickets;
+        return ticketIds;
     }
 
     public void setTickets(List<Long> tickets) {
-        this.tickets = tickets;
+        this.ticketIds = tickets;
     }
 
     public String getOrderDate() {
