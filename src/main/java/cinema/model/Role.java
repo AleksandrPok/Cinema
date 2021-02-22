@@ -15,7 +15,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    private Roles roleName;
+    private RoleName roleName;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class Role {
         this.id = id;
     }
 
-    public Roles getRoleName() {
+    public RoleName getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(Roles role) {
+    public void setRoleName(RoleName role) {
         this.roleName = role;
     }
 

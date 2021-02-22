@@ -26,14 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers(HttpMethod.POST, "/movies/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/movie-sessions/").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .antMatchers(HttpMethod.POST,"/register/").permitAll()
+                .antMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET).hasAnyRole("ADMIN", "USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
-                .and().httpBasic()
+                .and()
+                .httpBasic()
                 .and()
                 .csrf().disable();
     }

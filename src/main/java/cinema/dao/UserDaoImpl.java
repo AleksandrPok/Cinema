@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
     public Optional<User> findByEmail(String email) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("SELECT u FROM User u "
-                    + "LEFT JOIN FETCH u.roles WHERE u.email = :email", User.class)
+                    + "JOIN FETCH u.roles WHERE u.email = :email", User.class)
                     .setParameter("email", email).uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessException("Can't find user by email: " + email, e);
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
     public Optional<User> get(Long id) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("SELECT u FROM User u "
-                    + "LEFT JOIN FETCH u.roles WHERE u.id = :id", User.class)
+                    + "JOIN FETCH u.roles WHERE u.id = :id", User.class)
                     .setParameter("id", id).uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessException("Can't get user with id: " + id, e);

@@ -1,7 +1,7 @@
 package cinema.controller;
 
 import cinema.model.Role;
-import cinema.model.Roles;
+import cinema.model.RoleName;
 import cinema.model.User;
 import cinema.service.RoleService;
 import cinema.service.ShoppingCartService;
@@ -29,10 +29,10 @@ public class InjectData {
     @PostConstruct
     private void inject() {
         Role userRole = new Role();
-        userRole.setRoleName(Roles.USER);
+        userRole.setRoleName(RoleName.USER);
         roleService.add(userRole);
         Role adminRole = new Role();
-        adminRole.setRoleName(Roles.ADMIN);
+        adminRole.setRoleName(RoleName.ADMIN);
         roleService.add(adminRole);
         User admin = new User();
         admin.setRoles(List.of(adminRole));

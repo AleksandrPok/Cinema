@@ -2,7 +2,7 @@ package cinema.dao;
 
 import cinema.exception.DataProcessException;
 import cinema.model.Role;
-import cinema.model.Roles;
+import cinema.model.RoleName;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -43,7 +43,7 @@ public class RoleDaoImpl implements RoleDao {
     public Role getRoleByName(String roleName) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Role WHERE roleName = :roleName", Role.class)
-                    .setParameter("roleName", Roles.valueOf(roleName)).getSingleResult();
+                    .setParameter("roleName", RoleName.valueOf(roleName)).getSingleResult();
         } catch (Exception e) {
             throw new DataProcessException("Can't get role: " + roleName, e);
         }
