@@ -19,7 +19,8 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         cinema.model.User user = userService.findByEmail(userName)
-                .orElseThrow(() -> new UsernameNotFoundException("Can't get user by email: " + userName));
+                .orElseThrow(() -> new UsernameNotFoundException("Can't get user by email: "
+                        + userName));
         User.UserBuilder userBuilder = User.builder();
         userBuilder.username(user.getEmail());
         userBuilder.password(user.getPassword());

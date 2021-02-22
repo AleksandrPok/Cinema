@@ -4,8 +4,8 @@ import cinema.model.User;
 import cinema.service.RoleService;
 import cinema.service.ShoppingCartService;
 import cinema.service.UserService;
-import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
