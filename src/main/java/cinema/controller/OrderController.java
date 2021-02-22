@@ -8,10 +8,11 @@ import cinema.service.mappers.OrderMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,14 +34,18 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
+    public OrderResponseDto completeOrder(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String email = userDetails.getUsername();
         return orderMapper.mapToDto(orderService.completeOrder(shoppingCartService
-                .getByUser(userService.get(userId))));
+                .getByUser(userService.findByEmail(email).get())));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getByUser(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId)).stream()
+    public List<OrderResponseDto> getByUser(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String email = userDetails.getUsername();
+        return orderService.getOrdersHistory(userService.findByEmail(email).get()).stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
     }
