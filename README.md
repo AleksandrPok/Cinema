@@ -44,4 +44,6 @@ The project has an N-tier structure:
  - password: "your password"
  - db.url=jdbc:mysql://localhost/your_db_name?serverTimezone=EET
 
+You can log in and test the application as admin using email "admin@admin.admin" and password "admin".
+
 
