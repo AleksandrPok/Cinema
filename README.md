@@ -26,7 +26,6 @@ The project has an N-tier structure:
  - view information about registered users.
 
 ## Technologies
-
  - Java 11
  - Hibernate
  - Spring MVC
@@ -37,7 +36,6 @@ The project has an N-tier structure:
  - Apache Tomcat
 
 ## Running the Application
-
 1. Download and install JDK;
 2. Download and install servlet container;
 3. Download and install MySQL Server;
