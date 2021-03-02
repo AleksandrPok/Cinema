@@ -26,6 +26,7 @@ The project has an N-tier structure:
  - view information about registered users.
 
 ##Technologies
+
  - Java 11
  - Hibernate
  - Spring MVC
@@ -36,6 +37,7 @@ The project has an N-tier structure:
  - Apache Tomcat
 
 ##Running the Application
+
 1. Download and install JDK;
 2. Download and install servlet container;
 3. Download and install MySQL Server;
@@ -43,5 +45,7 @@ The project has an N-tier structure:
  - user: "your username"
  - password: "your password"
  - db.url=jdbc:mysql://localhost/your_db_name?serverTimezone=EET
+
+You can log in and test the application as admin using email "admin@admin.admin" and password "admin".
 
 
